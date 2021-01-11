@@ -20,16 +20,16 @@ public class User {
 
     private String name;
 
-    private String profile_image;
+    private String profileImage;
 
     @DateTimeFormat
-    private LocalDate terms_allow_date;
+    private LocalDate tosAgreeDate;
 
     @Column(columnDefinition = "integer default 0")
-    private int current_record;
+    private int currentRecord;
 
     @Column(columnDefinition = "integer default 0")
-    private int best_record;
+    private int bestRecord;
 
     private boolean isPrivate;
 
@@ -45,14 +45,14 @@ public class User {
     private Set<Friend> friendSet;
 
     @Builder
-    private User(String name, String profile_image, LocalDate terms_allow_date, int current_record, int best_record,
+    private User(String name, String profileImage, LocalDate tosAgreeDate, int currentRecord, int bestRecord,
                  boolean isPrivate, boolean isCompliedToday, Set<Place> placeSet, Set<Stamp> stampSet, Set<Friend> friendSet) {
 
         this.name = name;
-        this.profile_image = profile_image;
-        this.terms_allow_date = terms_allow_date;
-        this.current_record = current_record;
-        this.best_record = best_record;
+        this.profileImage = profileImage;
+        this.tosAgreeDate = tosAgreeDate;
+        this.currentRecord = currentRecord;
+        this.bestRecord = bestRecord;
         this.isPrivate = isPrivate;
         this.isCompliedToday = isCompliedToday;
         this.placeSet = placeSet;
