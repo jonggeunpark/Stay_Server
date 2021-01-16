@@ -19,17 +19,20 @@ repositories {
 	mavenCentral()
 }
 
+ext["mysql.version"] = "8.0.22" //mysql 버전 지정
+ext["hibernate.version"] = "5.4.20.Final" //hibernate 버전 지정
+
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
-ext["mysql.version"] = "8.0.22" //mysql 버전 지정
-ext["hibernate.version"] = "5.4.20.Final" //hibernate 버전 지정
-
-
 dependencies {
+	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.restdocs:spring-restdocs-core'
+	implementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -46,4 +49,11 @@ test {
 asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+bootJar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
 }
