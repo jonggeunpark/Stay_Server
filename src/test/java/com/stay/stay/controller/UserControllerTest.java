@@ -2,6 +2,7 @@ package com.stay.stay.controller;
 
 import com.stay.stay.constants.documentation.UserDocumentation;
 import com.stay.stay.domain.User;
+import com.stay.stay.dto.user.UserPrivacyDto;
 import com.stay.stay.dto.user.UserTosDto;
 import com.stay.stay.service.UserService;
 import org.apache.tomcat.jni.Local;
@@ -35,10 +36,7 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-    @Test
-    public void 약관_동의() throws Exception {
-
-        //given
+    public User createUser() {
         User user = User.builder()
                 .id(1L)
                 .name("민수")
@@ -52,6 +50,14 @@ public class UserControllerTest {
                 .currentRecord(0)
                 .bestRecord(0)
                 .build();
+
+        return user;
+    }
+    @Test
+    public void 약관_동의() throws Exception {
+
+        //given
+        User user = createUser();
 
         UserTosDto response = UserTosDto.builder()
                 .agreeDate(LocalDate.now())
@@ -70,5 +76,29 @@ public class UserControllerTest {
         result.andDo(print())
                 .andExpect(status().isOk())
                 .andDo(UserDocumentation.updateTos());
+    }
+
+    @Test
+    public void 공개_여부_변경() throws Exception {
+
+        //given
+        User user = createUser();
+        UserPrivacyDto userPrivacyDto = UserPrivacyDto.builder()
+                .isPrivate(false)
+                .build();
+
+        given(userService.updatePrivacy(any())).willReturn(userPrivacyDto);
+
+        //when
+        ResultActions result = mockMvc.perform(put("/user/privacy")
+                .header("userIndex", user.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isOk())
+                .andDo(UserDocumentation.updatePrivacy());
     }
 }
