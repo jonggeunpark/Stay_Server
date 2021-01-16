@@ -8,11 +8,9 @@ import com.stay.stay.dto.user.UpdateTosDto;
 import com.stay.stay.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     /** 위치정보 수집 동의 */
-    @PutMapping("/terms")
+    @PutMapping(value = "/terms", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Message> updateTermsAgreeDate(@RequestHeader("userIndex") Long userId) {
 
         User user = userService.findById(userId);
@@ -31,5 +29,4 @@ public class UserController {
         Message message = new Message(StatusCode.OK, ResponseMessage.Update_Tos_Agree_Date, response);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
 }
