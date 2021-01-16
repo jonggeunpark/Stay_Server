@@ -1,0 +1,26 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+= RESTful Notes API Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[user]]
+== User API
+
+==== 약관 동의 날짜 변경
+
+
+===== 요청 예시
+include::{snippets}/user/tos-update/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/user/tos-update/http-response.adoc[]
+
+===== 응답 필드
+
+include::{snippets}/user/tos-update/response-fields.adoc[]
