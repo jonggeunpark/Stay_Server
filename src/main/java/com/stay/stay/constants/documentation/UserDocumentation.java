@@ -36,4 +36,28 @@ public class UserDocumentation {
                 )
         );
     }
+
+    public static RestDocumentationResultHandler updatePrivacy() {
+        return document("user/privacy-update",
+                getDocumentRequest(),
+                getDocumentResponse(),
+                requestHeaders(
+                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-type")
+                ),
+                responseFields(
+                        fieldWithPath("status")
+                                .type(JsonFieldType.NUMBER)
+                                .description("응답 코드"),
+                        fieldWithPath("message")
+                                .type(JsonFieldType.STRING)
+                                .description("응답 메세지"),
+                        fieldWithPath("data")
+                                .type(JsonFieldType.OBJECT)
+                                .description("응답 데이터"),
+                        fieldWithPath("data.private")
+                                .type(JsonFieldType.BOOLEAN)
+                                .description("공개 여부")
+                )
+        );
+    }
 }
