@@ -1,7 +1,7 @@
 package com.stay.stay.service;
 
 import com.stay.stay.domain.User;
-import com.stay.stay.dto.user.UpdateTosDto;
+import com.stay.stay.dto.user.UserTosDto;
 import com.stay.stay.exception.NotFoundException;
 import com.stay.stay.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +20,18 @@ public class UserService {
     @Transactional
     public void saveUser(User user) {userRepository.save(user);}
 
-    @Transactional
     public User findById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User Not Found"));
     }
 
     @Transactional
-    public UpdateTosDto updateTosAgreeDate(User user){
+    public UserTosDto updateTosAgreeDate(User user){
 
         user.setTosAgreeDate(LocalDate.now());
+        saveUser(user);
 
-        return UpdateTosDto.of(LocalDate.now());
+        return UserTosDto.builder()
+                .agreeDate(user.getTosAgreeDate())
+                .build();
     }
 }
