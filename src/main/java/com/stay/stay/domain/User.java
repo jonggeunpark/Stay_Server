@@ -1,8 +1,6 @@
 package com.stay.stay.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id @GeneratedValue
@@ -45,9 +44,10 @@ public class User {
     private Set<Friend> friendSet;
 
     @Builder
-    private User(String name, String profileImage, LocalDate tosAgreeDate, int currentRecord, int bestRecord,
+    private User(Long id, String name, String profileImage, LocalDate tosAgreeDate, int currentRecord, int bestRecord,
                  boolean isPrivate, boolean isCompliedToday, Set<Place> placeSet, Set<Stamp> stampSet, Set<Friend> friendSet) {
 
+        this.id = id;
         this.name = name;
         this.profileImage = profileImage;
         this.tosAgreeDate = tosAgreeDate;
