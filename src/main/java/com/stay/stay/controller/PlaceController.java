@@ -49,8 +49,8 @@ public class PlaceController {
 
     /** 내 장소 상세조회 */
     @GetMapping("/{placeId}")
-    public ResponseEntity<Message> readPlace(@RequestHeader("userIndex") Long userId, @PathVariable("placeId") Long placeId) {
-        PlaceDto response = placeService.readPlace(placeId);
+    public ResponseEntity<Message> readPlace(@RequestHeader("userIndex") Long userId, @PathVariable("placeIndex") Long placeIndex) {
+        PlaceDto response = placeService.readPlace(placeIndex);
 
         Message message = new Message(StatusCode.OK, ResponseMessage.Read_place, response);
         return new ResponseEntity<>(message, HttpStatus.OK);

@@ -87,3 +87,17 @@ include::{snippets}/place/delete-place/http-request.adoc[]
 ===== 응답 예시
 include::{snippets}/place/delete-place/http-response.adoc[]
 include::{snippets}/place/delete-place/response-fields.adoc[]
+
+
+[[notice]]
+== Notice API
+
+[[read-notice-all]]
+==== 공지사항 목록 조회
+
+===== 요청 예시
+include::{snippets}/notice/read-notice-all/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/notice/read-notice-all/http-response.adoc[]
+include::{snippets}/notice/read-notice-all/response-fields.adoc[]
