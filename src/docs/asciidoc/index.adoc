@@ -66,3 +66,14 @@ include::{snippets}/place/read-place/http-request.adoc[]
 ===== 응답 예시
 include::{snippets}/place/read-place/http-response.adoc[]
 include::{snippets}/place/read-place/response-fields.adoc[]
+
+[[update-place]]
+==== 내 장소 변경
+
+===== 요청 예시
+include::{snippets}/place/update-place/http-request.adoc[]
+include::{snippets}/place/update-place/request-fields.adoc[]
+
+===== 응답 예시
+include::{snippets}/place/update-place/http-response.adoc[]
+include::{snippets}/place/update-place/response-fields.adoc[]

@@ -75,4 +75,22 @@ public class PlaceService {
 
         return response;
     }
+
+    @Transactional
+    public PlaceDto updatePlace(Long userId, PlaceDto placeDto) {
+        User user = userService.findById(userId);
+        Place place = findById(placeDto.getId());
+
+        place.setName(placeDto.getName());
+        place.setAddress(placeDto.getAddress());
+        savePlace(place);
+
+        PlaceDto response = PlaceDto.builder()
+                .id(place.getId())
+                .name(place.getName())
+                .address(place.getAddress())
+                .build();
+
+        return response;
+    }
 }
