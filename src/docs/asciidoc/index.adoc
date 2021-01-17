@@ -36,3 +36,18 @@ include::{snippets}/user/privacy-update/http-response.adoc[]
 ===== 응답 필드
 
 include::{snippets}/user/privacy-update/response-fields.adoc[]
+
+[[place]]
+== Place API
+
+[[create-place]]
+==== 내 장소 추가
+
+===== 요청 예시
+include::{snippets}/place/create-place/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/place/create-place/http-response.adoc[]
+
+===== 응답 필드
+include::{snippets}/place/create-place/response-fields.adoc[]
