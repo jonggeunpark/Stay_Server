@@ -16,13 +16,15 @@ public class Notice {
     @Column(name = "notice_id")
     private Long id;
 
+    private String title;
     private String content;
 
     @DateTimeFormat
     private LocalDate created_date;
 
     @Builder
-    private Notice(String content, LocalDate created_date){
+    private Notice(String title, String content, LocalDate created_date){
+        this.title = title;
         this.content = content;
         this.created_date = created_date;
     }
