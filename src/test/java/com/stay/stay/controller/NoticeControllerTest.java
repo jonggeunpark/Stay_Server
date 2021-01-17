@@ -1,9 +1,11 @@
 package com.stay.stay.controller;
 
 import com.stay.stay.constants.documentation.NoticeDocumentation;
+import com.stay.stay.dto.notice.NoticeDetailDto;
 import com.stay.stay.dto.notice.NoticeDto;
 import com.stay.stay.service.NoticeService;
 import com.stay.stay.service.UserService;
+import org.aspectj.weaver.ast.Not;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +63,31 @@ public class NoticeControllerTest {
         result.andDo(print())
                 .andExpect(status().isOk())
                 .andDo(NoticeDocumentation.readNoticeAll());
+    }
+
+    @Test
+    public void 공지사항_상세조회() throws Exception {
+
+        //given
+        NoticeDetailDto response = NoticeDetailDto.builder()
+                .id(1L)
+                .title("공지사항에 대해 안내드립니다.")
+                .content("내용입니다.")
+                .createdDate(LocalDate.of(2021,1,16))
+                .build();
+
+        given(noticeService.readNotice(eq(1L))).willReturn(response);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/notice/{noticeIndex}",1L)
+                .header("userIndex", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isOk())
+                .andDo(NoticeDocumentation.readNotice());
     }
 }

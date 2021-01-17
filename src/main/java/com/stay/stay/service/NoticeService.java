@@ -41,4 +41,18 @@ public class NoticeService {
 
         return response;
     }
+
+    public NoticeDetailDto readNotice(Long noticeId) {
+
+        Notice notice = findById(noticeId);
+
+        NoticeDetailDto response = NoticeDetailDto.builder()
+                .id(notice.getId())
+                .title(notice.getTitle())
+                .content(notice.getContent())
+                .createdDate(notice.getCreated_date())
+                .build();
+
+        return response;
+    }
 }

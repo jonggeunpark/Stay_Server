@@ -101,3 +101,13 @@ include::{snippets}/notice/read-notice-all/http-request.adoc[]
 ===== 응답 예시
 include::{snippets}/notice/read-notice-all/http-response.adoc[]
 include::{snippets}/notice/read-notice-all/response-fields.adoc[]
+
+[[read-notice]]
+==== 공지사항 상세 조회
+
+===== 요청 예시
+include::{snippets}/notice/read-notice/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/notice/read-notice/http-response.adoc[]
+include::{snippets}/notice/read-notice/response-fields.adoc[]
