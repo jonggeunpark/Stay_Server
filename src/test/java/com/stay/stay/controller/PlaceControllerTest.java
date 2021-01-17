@@ -112,18 +112,6 @@ public class PlaceControllerTest {
     public void 내_장소_조회() throws Exception {
 
         //given
-        PlaceDto placeDto1 = PlaceDto.builder()
-                .id(1L)
-                .name("학교")
-                .address("서울특별시 중구")
-                .build();
-
-        PlaceDto placeDto2 = PlaceDto.builder()
-                .id(2L)
-                .name("집")
-                .address("서울특별시 동대문구")
-                .build();
-
         List<PlaceDto> response = new ArrayList<>();
         response.add(new PlaceDto(1L,"학교","서울특별시 중구"));
         response.add(new PlaceDto(2L,"집","서울특별시 동대문구"));
@@ -157,7 +145,7 @@ public class PlaceControllerTest {
         given(placeService.readPlace(eq(1L))).willReturn(response);
 
         //when
-        ResultActions result = mockMvc.perform(get("/place/{placeId}", 1L)
+        ResultActions result = mockMvc.perform(get("/place/{placeIndex}", 1L)
                 .header("userIndex", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
