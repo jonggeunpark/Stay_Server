@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.mockito.ArgumentMatchers.any;
@@ -166,4 +167,37 @@ public class PlaceControllerTest {
                 .andExpect(status().isOk())
                 .andDo(PlaceDocumentation.readPlace());
     }
+
+    @Test
+    public void 내_장소_변경() throws Exception {
+
+        //given
+        PlaceDto request = PlaceDto.builder()
+                .id(1L)
+                .name("학교")
+                .address("서울특별시 중구")
+                .build();
+
+        PlaceDto response = PlaceDto.builder()
+                .id(1L)
+                .name("학교")
+                .address("서울특별시 중구")
+                .build();
+
+        given(placeService.updatePlace(eq(1L), any(PlaceDto.class))).willReturn(response);
+
+
+    //when
+    ResultActions result = mockMvc.perform(put("/place")
+            .header("userIndex", 1L)
+            .content(objectMapper.writeValueAsString(request))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+    );
+
+    //then
+        result.andDo(print())
+            .andExpect(status().isOk())
+            .andDo(PlaceDocumentation.updatePlace());
+}
 }
