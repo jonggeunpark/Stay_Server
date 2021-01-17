@@ -58,11 +58,21 @@ public class PlaceController {
 
     /** 내 장소 변경 */
     @PutMapping()
-    public ResponseEntity<Message> updatePrivacy(@RequestHeader("userIndex") Long userId, @RequestBody PlaceDto placeDto) {
+    public ResponseEntity<Message> updatePlace(@RequestHeader("userIndex") Long userId, @RequestBody PlaceDto placeDto) {
         User user = userService.findById(userId);
         PlaceDto response = placeService.updatePlace(userId, placeDto);
 
         Message message = new Message(StatusCode.OK, ResponseMessage.Update_place, response);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    /** 내 장소 삭제 */
+    @DeleteMapping()
+    public ResponseEntity<Message> deletePlace(@RequestHeader("userIndex") Long userId, @RequestHeader("placeIndex") Long placeId) {
+        User user = userService.findById(userId);
+        placeService.deletePlace(userId, placeId);
+
+        Message message = new Message(StatusCode.OK, ResponseMessage.Delete_place);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

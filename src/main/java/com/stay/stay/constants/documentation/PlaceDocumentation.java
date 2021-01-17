@@ -118,4 +118,22 @@ public class PlaceDocumentation {
                 )
         );
     }
+
+    public static RestDocumentationResultHandler deletePlace() {
+        return document("place/delete-place",
+                getDocumentRequest(),
+                getDocumentResponse(),
+                requestHeaders(
+                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-type")
+                ),
+                responseFields(
+                        fieldWithPath("status")
+                                .type(JsonFieldType.NUMBER).description("응답 코드"),
+                        fieldWithPath("message")
+                                .type(JsonFieldType.STRING).description("응답 메세지"),
+                        fieldWithPath("data")
+                                .type(JsonFieldType.NULL).description("응답 데이터")
+                )
+        );
+    }
 }

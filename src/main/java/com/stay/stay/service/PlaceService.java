@@ -93,4 +93,10 @@ public class PlaceService {
 
         return response;
     }
+
+    @Transactional
+    public void deletePlace(Long userId, Long placeId) {
+        User user = userService.findById(userId);
+        placeRepository.deleteById(placeId);
+    }
 }

@@ -9,6 +9,7 @@ public class ResponseMessage {
     public static final String Read_place_all = "내 장소 조회 성공";
     public static final String Read_place = "내 장소 상세조회 성공";
     public static final String Update_place = "내 장소 변경 성공";
+    public static final String Delete_place = "내 장소 삭제 성공";
 
 
     public static final String NotFound = "Not Found Exception";
