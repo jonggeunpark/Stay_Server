@@ -1,12 +1,13 @@
 package com.stay.stay.controller;
 
-import com.stay.stay.constants.documentation.UserDocumentation;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stay.stay.constants.documentation.PlaceDocumentation;
+import com.stay.stay.domain.Place;
 import com.stay.stay.domain.User;
-import com.stay.stay.dto.user.UserPrivacyDto;
-import com.stay.stay.dto.user.UserTosDto;
+import com.stay.stay.dto.place.PlaceRequest;
+import com.stay.stay.service.PlaceService;
 import com.stay.stay.service.UserService;
-import org.apache.tomcat.jni.Local;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -19,20 +20,27 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = UserController.class)
+@WebMvcTest(controllers = PlaceController.class)
 @AutoConfigureRestDocs
-public class UserControllerTest {
+public class PlaceControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @MockBean
+    private PlaceService placeService;
 
     @MockBean
     private UserService userService;
@@ -54,45 +62,31 @@ public class UserControllerTest {
 
         return user;
     }
-    @Test
-    public void 약관_동의() throws Exception {
 
-        //given
-        User user = createUser();
-
-        UserTosDto response = UserTosDto.builder()
-                .agreeDate(LocalDate.now())
+    public Place createPlace(User user) {
+        Place place = Place.builder()
+                .user(user)
+                .name("학교")
+                .address("서울특별시 중구")
                 .build();
 
-        given(userService.updateTosAgreeDate(any())).willReturn(response);
-
-        //when
-        ResultActions result = mockMvc.perform(put("/user/terms")
-                .header("userIndex", user.getId())
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-        );
-
-        //then
-        result.andDo(print())
-                .andExpect(status().isOk())
-                .andDo(UserDocumentation.updateTos());
+        return place;
     }
 
     @Test
-    public void 공개_여부_변경() throws Exception {
+    public void 내_장소_추가() throws Exception {
 
         //given
         User user = createUser();
-        UserPrivacyDto userPrivacyDto = UserPrivacyDto.builder()
-                .isPrivate(false)
-                .build();
+        Long id = 1L;
+        PlaceRequest request = PlaceRequest.builder().name("학교").address("서울특별시 중구").build();
 
-        given(userService.updatePrivacy(any())).willReturn(userPrivacyDto);
+        given(placeService.createPlace(user, request)).willReturn(id);
 
         //when
-        ResultActions result = mockMvc.perform(put("/user/privacy")
+        ResultActions result = mockMvc.perform(post("/place")
                 .header("userIndex", user.getId())
+                .content(objectMapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         );
@@ -100,6 +94,6 @@ public class UserControllerTest {
         //then
         result.andDo(print())
                 .andExpect(status().isOk())
-                .andDo(UserDocumentation.updatePrivacy());
+                .andDo(PlaceDocumentation.createPlace());
     }
 }
