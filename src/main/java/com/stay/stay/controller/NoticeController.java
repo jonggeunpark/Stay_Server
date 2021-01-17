@@ -34,7 +34,7 @@ public class NoticeController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    /** 내 장소 상세조회 */
+    /** 공지사항 상세 조회 */
     @GetMapping("/{noticeIndex}")
     public ResponseEntity<Message> readNotice(@RequestHeader("userIndex") Long userId, @PathVariable("noticeIndex") Long noticeId) {
         NoticeDetailDto response = noticeService.readNotice(noticeId);
