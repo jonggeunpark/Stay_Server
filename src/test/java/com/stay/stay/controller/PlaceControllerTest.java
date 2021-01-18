@@ -9,7 +9,7 @@ import com.stay.stay.dto.place.PlaceIdDto;
 import com.stay.stay.dto.place.PlaceRequest;
 import com.stay.stay.service.PlaceService;
 import com.stay.stay.service.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -92,14 +92,17 @@ public class PlaceControllerTest {
 
         given(placeService.createPlace(eq(1L), any(PlaceRequest.class))).willReturn(response);
 
-        PlaceRequest request = PlaceRequest.builder().name("학교").address("서울특별시 중구").build();
+        PlaceRequest request = new PlaceRequest();
+        request.setName("학교");
+        request.setAddress("서울특별시 중구");
+
 
         //when
         ResultActions result = mockMvc.perform(post("/place")
                 .header("userIndex", 1L)
                 .content(objectMapper.writeValueAsString(request))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8)
         );
 
         //then
