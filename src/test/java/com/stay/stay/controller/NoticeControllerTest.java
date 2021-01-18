@@ -6,7 +6,7 @@ import com.stay.stay.dto.notice.NoticeDto;
 import com.stay.stay.service.NoticeService;
 import com.stay.stay.service.UserService;
 import org.aspectj.weaver.ast.Not;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;

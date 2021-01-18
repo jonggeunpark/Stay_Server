@@ -20,12 +20,15 @@ public class PlaceDocumentation {
                 requestHeaders(
                         headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-type")
                 ),
+                /*
                 requestFields(
                         fieldWithPath("name")
                                 .type(JsonFieldType.STRING).description("장소 이름"),
                         fieldWithPath("address")
                                 .type(JsonFieldType.STRING).description("장소 주소")
                         ),
+
+                 */
                 responseFields(
                         fieldWithPath("status")
                                 .type(JsonFieldType.NUMBER).description("응답 코드"),
@@ -94,6 +97,7 @@ public class PlaceDocumentation {
                 requestHeaders(
                         headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-type")
                 ),
+                /*
                 requestFields(
                         fieldWithPath("id")
                                 .type(JsonFieldType.NUMBER).description("변경할 장소 id"),
@@ -102,6 +106,7 @@ public class PlaceDocumentation {
                         fieldWithPath("address")
                                 .type(JsonFieldType.STRING).description("변경할 장소 주소")
                 ),
+                */
                 responseFields(
                         fieldWithPath("status")
                                 .type(JsonFieldType.NUMBER).description("응답 코드"),
