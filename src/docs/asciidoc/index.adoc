@@ -40,7 +40,6 @@ include::{snippets}/user/privacy-update/response-fields.adoc[]
 
 ===== 요청 예시
 include::{snippets}/place/create-place/http-request.adoc[]
-include::{snippets}/place/create-place/request-fields.adoc[]
 
 ===== 응답 예시
 include::{snippets}/place/create-place/http-response.adoc[]
@@ -72,7 +71,6 @@ include::{snippets}/place/read-place/response-fields.adoc[]
 
 ===== 요청 예시
 include::{snippets}/place/update-place/http-request.adoc[]
-include::{snippets}/place/update-place/request-fields.adoc[]
 
 ===== 응답 예시
 include::{snippets}/place/update-place/http-response.adoc[]
