@@ -13,6 +13,8 @@ public class ResponseMessage {
 
     public static final String Read_friend_all = "친구 목록 조회 성공";
 
+    public static final String Read_stamp_for_calendar = "캘린더 조회 성공";
+
     public static final String Read_notice_all = "공지사항 목록 조회 성공";
     public static final String Read_notice = "공지사항 상세 조회 성공";
 
