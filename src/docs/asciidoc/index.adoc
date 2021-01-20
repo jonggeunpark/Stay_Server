@@ -109,3 +109,15 @@ include::{snippets}/notice/read-notice/http-request.adoc[]
 ===== 응답 예시
 include::{snippets}/notice/read-notice/http-response.adoc[]
 include::{snippets}/notice/read-notice/response-fields.adoc[]
+
+[[Friend]]
+== Friend API
+
+[[read-friend-all]]
+==== 친구 목록 조회
+===== 요청 예시
+include::{snippets}/friend/read-friend-all/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/friend/read-friend-all/http-response.adoc[]
+include::{snippets}/friend/read-friend-all/response-fields.adoc[]

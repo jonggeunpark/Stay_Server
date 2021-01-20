@@ -19,21 +19,21 @@ public class Friend {
     private User user;
 
     private String name;
-    private String profile_image;
-    private int current_record;
-    private int best_record;
+    private String profileImage;
+    private int currentRecord;
+    private int bestRecord;
     private boolean isPrivate;
 
 
     @Builder
-    private Friend(User user, String name, String profile_image, int current_record, int best_record, boolean isPrivate) {
+    private Friend(User user, String name, String profileImage, int currentRecord, int bestRecord, boolean isPrivate) {
 
         this.user = user;
         user.getFriendSet().add(this);
         this.name = name;
-        this.profile_image = profile_image;
-        this.current_record = current_record;
-        this.best_record = best_record;
+        this.profileImage = profileImage;
+        this.currentRecord = currentRecord;
+        this.bestRecord = bestRecord;
         this.isPrivate = isPrivate;
     }
 }
