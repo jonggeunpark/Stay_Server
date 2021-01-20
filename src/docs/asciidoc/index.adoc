@@ -121,3 +121,16 @@ include::{snippets}/friend/read-friend-all/http-request.adoc[]
 ===== 응답 예시
 include::{snippets}/friend/read-friend-all/http-response.adoc[]
 include::{snippets}/friend/read-friend-all/response-fields.adoc[]
+
+[[Stamp]]
+== Stamp API
+
+[[read-stamp-for-calendar]]
+==== 캘린더 조회
+
+===== 요청 예시
+include::{snippets}/stamp/read-stamp-for-calendar/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/stamp/read-stamp-for-calendar/http-response.adoc[]
+include::{snippets}/stamp/read-stamp-for-calendar/response-fields.adoc[]
