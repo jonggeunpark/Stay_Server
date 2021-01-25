@@ -6,7 +6,7 @@ import com.stay.stay.dto.corona.CoronaDto;
 import com.stay.stay.dto.home.HomeDto;
 import com.stay.stay.service.HomeService;
 import com.stay.stay.service.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
