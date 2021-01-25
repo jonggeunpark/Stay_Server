@@ -70,18 +70,15 @@ public class CoronaService {
         Corona corona = findById(1L);
         String ServiceKey = Covid19.ServiceKey;
         Date today = new Date();
-        Date yesterday = addDay(today, -1);
 
         SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-        String startCreateDt = date.format(yesterday);
-        String endCreateDt = date.format(today);
+        String todayString = date.format(today);
 
         try{
-
             StringBuilder urlBuilder = new StringBuilder("http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson");
             urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + ServiceKey);
-            urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(startCreateDt, "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(endCreateDt, "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(todayString, "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(todayString, "UTF-8"));
             URL url = new URL(urlBuilder.toString());
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
@@ -89,34 +86,17 @@ public class CoronaService {
             Document doc = dBuilder.parse(String.valueOf(url));
 
             doc.getDocumentElement().normalize();
-
             NodeList nList = doc.getElementsByTagName("item");
-
-            int decideYesterday = -1;
-            int decideToday = -1;
-            int cnt;
-            String stateDt = startCreateDt;
 
             for(int temp = 0; temp < nList.getLength(); temp++){
                 Node nNode = nList.item(temp);
                 if(nNode.getNodeType() == Node.ELEMENT_NODE){
 
                     Element eElement = (Element) nNode;
-                    if(Objects.equals(getTagValue("stateDt", eElement), startCreateDt)) {
-                        decideYesterday = Integer.parseInt(Objects.requireNonNull(getTagValue("decideCnt", eElement)));
-                    }
-
-                    if(Objects.equals(getTagValue("stateDt", eElement), endCreateDt)) {
-                        decideToday = Integer.parseInt(Objects.requireNonNull(getTagValue("decideCnt", eElement)));
-                        stateDt = getTagValue("STATE_DT", eElement);
-                    }
-
+                    corona.setStateDt(getTagValue("stateDt", eElement));
+                    corona.setDecideCnt(getTagValue("decideCnt", eElement));
                 }
             }
-
-            cnt = decideToday - decideYesterday;
-            corona.setSTATE_DT(stateDt);
-            corona.setDECIDE_CNT(cnt);
             saveCorona(corona);
 
         } catch (Exception e) {

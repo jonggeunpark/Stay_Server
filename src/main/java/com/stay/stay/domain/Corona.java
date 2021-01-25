@@ -14,16 +14,14 @@ public class Corona {
     @Column(name = "corona_id")
     private Long id;
 
-    private String STATE_DT;
-    private String STATE_TIME;
-    private int DECIDE_CNT;
-    private int DISTANCING_NUM;
+    private String stateDt;
+    private String decideCnt;
+    private int distancingNum;
 
     @Builder
-    public Corona(String STATE_DT, String STATE_TIME, int DECIDE_CNT, int DISTANCING_NUM) {
-        this.STATE_DT = STATE_DT;
-        this.STATE_TIME = STATE_TIME;
-        this.DECIDE_CNT = DECIDE_CNT;
-        this.DISTANCING_NUM = DISTANCING_NUM;
+    public Corona(String stateDt, String decideCnt, int distancingNum) {
+        this.stateDt = stateDt;
+        this.decideCnt = decideCnt;
+        this.distancingNum = distancingNum;
     }
 }
