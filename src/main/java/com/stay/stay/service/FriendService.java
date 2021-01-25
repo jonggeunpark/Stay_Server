@@ -40,18 +40,7 @@ public class FriendService {
 
             friendDtoList.add(friendDto);
         }
-        /*
-        for (Friend friend : friendList) {
-            FriendDto friendDto = FriendDto.builder()
-                    .name(friend.getName())
-                    .profileImage(friend.getProfileImage())
-                    .isPrivate(friend.isPrivate())
-                    .currentRecord(friend.getCurrentRecord())
-                    .rank(rank)
-                    .build();
 
-            friendDtoList.add(friendDto);
-*/
         UserRankDto userRankDto = UserRankDto.builder()
                 .name(user.getName())
                 .profileImage(user.getProfileImage())
