@@ -3,7 +3,9 @@ package com.stay.stay.controller;
 import com.stay.stay.constants.documentation.FriendDocumentation;
 import com.stay.stay.constants.documentation.StampDocumentation;
 import com.stay.stay.dto.place.PlaceRequest;
+import com.stay.stay.dto.stamp.CalendarDto;
 import com.stay.stay.dto.stamp.StampDto;
+import com.stay.stay.dto.user.UserRecordDto;
 import com.stay.stay.service.StampService;
 import com.stay.stay.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -47,10 +49,20 @@ public class StampControllerTest {
     public void 스탬프_월별_조회() throws Exception {
 
         //given
-        List<StampDto> response = new ArrayList<>();
-        response.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,1)), true));
-        response.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,2)), false));
-        response.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,3)), true));
+        List<StampDto> stampDtoList = new ArrayList<>();
+        stampDtoList.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,1)), true));
+        stampDtoList.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,2)), false));
+        stampDtoList.add(new StampDto(Date.valueOf(LocalDate.of(2021,1,3)), true));
+
+        UserRecordDto userRecordDto = UserRecordDto.builder()
+                .currentRecord(4)
+                .bestRecord(5)
+                .build();
+
+        CalendarDto response = CalendarDto.builder()
+                .record(userRecordDto)
+                .stamp(stampDtoList)
+                .build();
 
         given(stampService.readStampForCalendar(eq(1L), eq(2020), eq(1))).willReturn(response);
 

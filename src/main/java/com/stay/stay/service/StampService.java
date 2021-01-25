@@ -2,7 +2,9 @@ package com.stay.stay.service;
 
 import com.stay.stay.domain.Stamp;
 import com.stay.stay.domain.User;
+import com.stay.stay.dto.stamp.CalendarDto;
 import com.stay.stay.dto.stamp.StampDto;
+import com.stay.stay.dto.user.UserRecordDto;
 import com.stay.stay.repository.CalendarInterface;
 import com.stay.stay.repository.StampRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +29,15 @@ public class StampService {
     @Transactional
     public void saveStamp(Stamp stamp) { stampRepository.save(stamp); }
 
-    public List<StampDto> readStampForCalendar(Long userId, int year, int month) {
+    public CalendarDto readStampForCalendar(Long userId, int year, int month) {
         User user = userService.findById(userId);
-        List<StampDto> response = new ArrayList<>();
+
+        UserRecordDto userRecordDto = UserRecordDto.builder()
+                .currentRecord(user.getCurrentRecord())
+                .bestRecord(user.getBestRecord())
+                .build();
+
+        List<StampDto> stampDtoList = new ArrayList<>();
         List<CalendarInterface> calendarInterfaceList = stampRepository.findStampForCalendar(userId, year, month);
 
         for(CalendarInterface calendarInterface :calendarInterfaceList){
@@ -43,10 +51,14 @@ public class StampService {
                     .get(get)
                     .build();
 
-            response.add(stampDto);
+            stampDtoList.add(stampDto);
         }
 
-        return response;
+
+        return CalendarDto.builder()
+                .record(userRecordDto)
+                .stamp(stampDtoList)
+                .build();
     }
 
 }

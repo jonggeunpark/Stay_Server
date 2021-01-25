@@ -26,10 +26,14 @@ public class StampDocumentation {
                         fieldWithPath("message")
                                 .type(JsonFieldType.STRING).description("응답 메세지"),
                         fieldWithPath("data")
-                                .type(JsonFieldType.ARRAY).description("응답 데이터"),
-                        fieldWithPath("data[].date")
+                                .type(JsonFieldType.OBJECT).description("응답 데이터"),
+                        fieldWithPath("data.record.currentRecord")
+                                .type(JsonFieldType.NUMBER).description("현재 기록"),
+                        fieldWithPath("data.record.bestRecord")
+                                .type(JsonFieldType.NUMBER).description("최고 기록"),
+                        fieldWithPath("data.stamp[].date")
                                 .type(JsonFieldType.STRING).description("날짜"),
-                        fieldWithPath("data[].get")
+                        fieldWithPath("data.stamp[].get")
                                 .type(JsonFieldType.BOOLEAN).description("획득 여부")
                 )
         );
