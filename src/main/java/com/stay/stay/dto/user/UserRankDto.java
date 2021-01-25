@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 public class UserRankDto {
 
     String name;
-    String profileImage;
     int currentRecord;
+    int rank;
 
     @Builder
-    private UserRankDto(String name, String profileImage, int currentRecord) {
+    private UserRankDto(String name, int currentRecord, int rank) {
         this.name = name;
-        this.profileImage = profileImage;
         this.currentRecord = currentRecord;
+        this.rank = rank;
     }
 }

@@ -29,22 +29,38 @@ public class FriendService {
         User user = userService.findById(userId);
         List<RankInterface> rankInterfaceList = friendRepository.findFriendByPrivateAndRecord(userId);
         List<FriendDto> friendDtoList = new ArrayList<>();
+        int rank = -1;
         for(RankInterface rankInterface: rankInterfaceList) {
-            FriendDto friendDto = FriendDto.builder()
-                    .name(rankInterface.getName())
-                    .profileImage(rankInterface.getProfile_image())
-                    .isPrivate(rankInterface.getIs_private())
-                    .currentRecord(rankInterface.getCurrent_record())
-                    .rank(rankInterface.getRanking())
-                    .build();
 
-            friendDtoList.add(friendDto);
+            if(rankInterface.getTable_name().equals("user")){
+                FriendDto friendDto = FriendDto.builder()
+                        .name("나")
+                        .profileImage(rankInterface.getProfile_image())
+                        .isPrivate(rankInterface.getIs_private())
+                        .currentRecord(rankInterface.getCurrent_record())
+                        .rank(rankInterface.getRanking())
+                        .build();
+
+                rank = rankInterface.getRanking();
+                friendDtoList.add(friendDto);
+            } else {
+                FriendDto friendDto = FriendDto.builder()
+                        .name(rankInterface.getName())
+                        .profileImage(rankInterface.getProfile_image())
+                        .isPrivate(rankInterface.getIs_private())
+                        .currentRecord(rankInterface.getCurrent_record())
+                        .rank(rankInterface.getRanking())
+                        .build();
+
+                friendDtoList.add(friendDto);
+            }
+
         }
 
         UserRankDto userRankDto = UserRankDto.builder()
                 .name(user.getName())
-                .profileImage(user.getProfileImage())
                 .currentRecord(user.getCurrentRecord())
+                .rank(rank)
                 .build();
 
         RankDto response = RankDto.builder()

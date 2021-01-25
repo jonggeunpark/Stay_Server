@@ -47,15 +47,16 @@ public class FriendControllerTest {
         //given
         UserRankDto userRankDto = UserRankDto.builder()
                 .name("시연")
-                .profileImage("link")
                 .currentRecord(4)
+                .rank(2)
                 .build();
 
         List<FriendDto> friendDtoList = new ArrayList<>();
         friendDtoList.add(new FriendDto("종근","link", false, 5, 1));
+        friendDtoList.add(new FriendDto("나","link", false, 4, 2));
         friendDtoList.add(new FriendDto("선영","link", false, 4, 2));
         friendDtoList.add(new FriendDto("민수","link", false, 2, 4));
-        friendDtoList.add(new FriendDto("철수","link", true, 13, 0));
+        friendDtoList.add(new FriendDto("철수","link", true, 13, 5));
 
         RankDto response = RankDto.builder()
                 .user(userRankDto)

@@ -31,10 +31,10 @@ public class FriendDocumentation {
                                 .type(JsonFieldType.OBJECT).description("유저 데이터"),
                         fieldWithPath("data.user.name")
                                 .type(JsonFieldType.STRING).description("유저 이름"),
-                        fieldWithPath("data.user.profileImage")
-                                .type(JsonFieldType.STRING).description("유저 프로필 이미지 링크"),
                         fieldWithPath("data.user.currentRecord")
                                 .type(JsonFieldType.NUMBER).description("유저 기록"),
+                        fieldWithPath("data.user.rank")
+                                .type(JsonFieldType.NUMBER).description("유저 순위"),
                         fieldWithPath("data.friends[].name")
                                 .type(JsonFieldType.STRING).description("친구 이름"),
                         fieldWithPath("data.friends[].profileImage")
