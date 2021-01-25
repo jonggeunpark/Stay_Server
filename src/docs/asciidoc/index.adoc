@@ -9,6 +9,20 @@ endif::[]
 :toclevels: 4
 :sectlinks:
 
+
+[[home]]
+== Home API
+
+[[read-home]]
+==== 홈 화면 조회
+
+===== 요청 예시
+include::{snippets}/home/read-home/http-request.adoc[]
+
+===== 응답 예시
+include::{snippets}/home/read-home/http-response.adoc[]
+include::{snippets}/home/read-home/response-fields.adoc[]
+
 [[user]]
 == User API
 
