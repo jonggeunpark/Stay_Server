@@ -18,6 +18,8 @@ public class ResponseMessage {
     public static final String Read_notice_all = "공지사항 목록 조회 성공";
     public static final String Read_notice = "공지사항 상세 조회 성공";
 
+    public static final String Read_home = "홈 화면 조회 성공";
+
     public static final String NotFound = "Not Found Exception";
 
 }
